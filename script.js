@@ -28,41 +28,45 @@ formTime.addEventListener("submit", (e) => {
 });
 
 // question 3
-let forms = document.querySelectorAll("form");
-let actualNo = document.querySelector("#actualNo");
-let noToFind = document.querySelector("#noToFind");
-let msgPara = document.getElementById("msg");
+let showNum = document.getElementById("msg-num");
+let showArr = document.getElementById("msg-arr");
 
-const findNext = (number, target) => {
-    for (let i = 0; i < number.length; i++) {
-        if (target == number[i]) {
-            if (target == number[number.length - 1]) {
-                msgPara.innerText = `You entered last digit. No number next!`;
-            }
-            else {
-                msgPara.innerText = `Number next to the ${number[i]} is ${number[i + 1]
-                    }`;
-                break;
-            }
-        }
+function findNextNum() {
+    let userInput = document.getElementById("numberInput").value;
+    let number = parseFloat(userInput);
+
+    if (isNaN(number)) {
+        showNum.innerText = `please enter a valid number`;
     }
-};
+    else if (Number.isInteger(number)) {
+        let nextNum = number + 1;
+        showNum.innerText = `the number next to ${number} is ${nextNum}`;
+    } else {
+        let nextNum = number + 0.1;
+        showNum.innerText = `the number next to ${number} is ${nextNum.toFixed(1)}`;
+    }
+}
 
-forms.forEach((form) => {
-    form.addEventListener("submit", (e) => {
-        e.preventDefault();
-        let number = actualNo.value.toString(); // converting number to the string to make it iterable
-        let target = noToFind.value.toString();
-        findNext(number, target[0]); // only one number is used as target, even if user enter large number
+function findNextArrElem() {
+    let userInput = document.getElementById("arrayInput").value;
+    let arr = userInput.split(",");  // splitting the user elem into array by ","
+
+    let newArr = arr.map((elem) => {
+        return parseFloat(elem);
     });
-});
 
+    showArr.innerText = `The next element is ${newArr[newArr.length - 1] + 1}`;
+}
 
 // question 4
+let nameForm = document.getElementById("name");
+let inputName = document.getElementById("username");
 let p = document.getElementById("show-name");
-let name = prompt("Enter your name: ");
-p.innerText = name;
-p.style.textTransform = "capitalize";
+nameForm.addEventListener("submit", (e) => {
+    e.preventDefault();
+    p.innerText = inputName.value;
+    p.style.textTransform = "capitalize";
+});
 
 // question 5
 let bmiForm = document.querySelectorAll(".bmi-form");
@@ -76,7 +80,6 @@ const calculateBMI = (weightInKg, heightInMeters) => {
     let BMI = weightInKg / (heightInMeters * heightInMeters);
     return BMI.toFixed(1);
 };
-
 const showResult = (totalBMI) => {
     msgP.innerText = `BMI: ${totalBMI}`;
 
@@ -90,7 +93,6 @@ const showResult = (totalBMI) => {
         msgP.innerText += ` Obese`;
     }
 };
-
 bmiForm.forEach((form) => {
     form.addEventListener("submit", (e) => {
         e.preventDefault();
@@ -103,26 +105,20 @@ bmiForm.forEach((form) => {
 });
 
 // question 6
-let arr = [33, 4, 5, 2, 63, 25, 234];
-let arrParagraph = document.getElementById("arr-para");
-let elemParagraph = document.getElementById("elem-para");
 
-for (const elem of arr) {
-    arrParagraph.innerText += ` ${elem}`;
+function showFirstAndLast() {
+    let userInput = document.getElementById("arrInput").value;
+    let elemParagraph = document.getElementById("elem-para");
+
+    let arr = userInput.split(",");
+
+    let newArr = arr.map((elem) => {
+        return parseFloat(elem);
+    });
+
+    elemParagraph.innerText = `First element ${newArr[0]} and last element is ${newArr[newArr.length - 1]}`;
 }
 
-function showFirstAndLast(arr) {
-    for (let i = 0; i < arr.length; i++) {
-        if (i == 0) {
-            elemParagraph.innerText = `first element: ${arr[i]}`;
-        } else if (i == arr.length - 1) {
-            elemParagraph.innerText = elemParagraph.innerText.concat(
-                ` and last element: ${arr[i]}`
-            );
-        }
-    }
-}
-showFirstAndLast(arr);
 
 // question 7
 let firstNum = document.getElementById("f-number");
@@ -134,9 +130,9 @@ const updateResult = () => {
     let num2 = parseFloat(secondNum.value);
 
     if (isNaN(num1)) {
-        result.value = "NaN";
+        result.value = NaN;
     } else if (isNaN(num2)) {
-        result.value = "NaN";
+        result.value = NaN;
     } else {
         let r = num1 + num2;
         result.value = r;

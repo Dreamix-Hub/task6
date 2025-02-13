@@ -31,6 +31,9 @@
       <form action="" class="my-3" id="form-age">
         <label for="age">Enter your age in years:</label>
         <input type="number" class="input-field" min="1" />
+        <div>
+          <button type="submit" class="btn btn-dark my-3">calculate</button>
+        </div>
       </form>
       <p id="show-age"></p>
     </div>
@@ -41,6 +44,9 @@
       <form action="" id="form-time">
         <label for="time">Enter time in Hours:</label>
         <input type="number" min="0" id="time" />
+        <div>
+          <button type="submit" class="btn btn-dark my-3">calculate</button>
+        </div>
       </form>
       <p id="msg-container" class="my-2"></p>
     </div>
@@ -48,15 +54,42 @@
     <!-- question 3 -->
     <div class="container text-center">
       <h1 class="fw-bold my-3">Find Number Next to the certain Number</h1>
-      <form action="" class="my-3">
-        <label for="actualNo">Enter a number:</label>
-        <input type="number" id="actualNo" />
-      </form>
-      <form action="" class="my-2">
-        <label for="noToFind">Enter number to find next:</label>
-        <input type="number" id="noToFind" />
-      </form>
-      <p id="msg" class="my-3"></p>
+      <div>
+        <div class="my-3">
+          <label for="numberInput">Enter integer or float numbers:</label>
+          <input type="number" id="numberInput" step="0.1" />
+        </div>
+        <div>
+          <button
+            type="submit"
+            onclick="findNextNum()"
+            id="number-btn"
+            class="btn btn-dark my-3"
+          >
+            find
+          </button>
+        </div>
+        <p id="msg-num" class="my-3"></p>
+      </div>
+      <div>
+        <div class="my-3">
+          <label for="arrayInput"
+            >Enter an array separated by comma &lpar; , &rpar;</label
+          >
+          <input type="text" id="arrayInput" />
+        </div>
+        <div>
+          <button
+            type="submit"
+            onclick="findNextArrElem()"
+            id="arr-btn"
+            class="btn btn-dark my-3"
+          >
+            find in array
+          </button>
+        </div>
+        <p id="msg-arr" class="my-3"></p>
+      </div>
     </div>
 
     <!-- question 4 -->
@@ -64,6 +97,13 @@
       <h1 class="my-5 text-capitalize fw-bold">
         show name in such a way that first letter should be capitalized
       </h1>
+      <form action="" id="name">
+        <label for="username">Enter your name here:</label>
+        <input type="text" id="username" />
+        <div>
+          <button type="submit" class="btn btn-dark my-3">capitalize</button>
+        </div>
+      </form>
       <p class="fs-2" id="show-name"></p>
     </div>
 
@@ -99,7 +139,22 @@
 
     <!-- question 6 -->
     <div class="container text-center">
-      <p id="arr-para" class="fs-3">Array elements are:</p>
+      <h1>Showing first and last element by taking array from user</h1>
+      <div>
+        <label for="arrInput"
+          >Enter an array separated by comma &lpar; , &rpar;:</label
+        >
+        <input type="text" id="arrInput" />
+      </div>
+      <div>
+        <button
+          onclick="showFirstAndLast()"
+          type="submit"
+          class="btn btn-dark my-3"
+        >
+          calculate
+        </button>
+      </div>
       <p class="fs-4 my-1" id="elem-para"></p>
     </div>
 
